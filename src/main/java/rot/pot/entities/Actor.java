@@ -28,8 +28,8 @@ public class Actor {
 
     private Date dateOfBirth;
 
-//    @OneToMany(mappedBy = "team")
-//    private List<User> players = new ArrayList<>();
+    @ManyToMany
+    private List<Movie> movies = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {

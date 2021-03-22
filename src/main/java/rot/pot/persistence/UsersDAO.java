@@ -5,7 +5,6 @@ import rot.pot.entities.User;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import java.util.UUID;
 
 @ApplicationScoped
 public class UsersDAO {

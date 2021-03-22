@@ -5,9 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @NamedQueries({
@@ -31,20 +29,8 @@ public class User implements Serializable {
 
     private Date dateOfBirth;
 
-//    @Size(max = 50)
-//    @Column(name = "NAME")
-//    private String name;
-//
-//    @Column(name = "JERSEY_NUMBER")
-//    private Integer jerseyNumber;
-
-//    @ManyToOne
-//    @JoinColumn(name="TEAM_ID")
-//    private Actor actor;
-
-    @Version
-    @Column(name = "OPT_LOCK_VERSION")
-    private Integer version;
+    @OneToMany(mappedBy = "user")
+    private List<Rating> ratings = new ArrayList<>();
 
     public User() {
     }
