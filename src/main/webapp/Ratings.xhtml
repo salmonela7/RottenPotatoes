@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:body>
+    <h:form>
+        <h:panelGrid columns="3">
+            <h:outputLabel>Comment:</h:outputLabel>
+            <h:inputText value="#{ratings.ratingToCreate.comment}" required="false"/>
+            <br />
+            <br />
+
+            <h:outputLabel>Rating:</h:outputLabel>
+            <h:inputText value="#{ratings.ratingToCreate.rating}" maxlength="2" required="true">
+                <f:validateLongRange minimum="1" maximum="10" />
+            </h:inputText>
+            <br />
+            <br />
+        </h:panelGrid>
+        <h:commandButton value="Add rating" action="#{ratings.createRating}" />
+    </h:form>
+    <h:form>
+        <h:commandButton value="Go main page" action="MainPage?faces-redirect=true" />
+        <br/>
+        <h:commandButton value="Logout" action="#{users.logout}" />
+    </h:form>
+</h:body>
+</html>
