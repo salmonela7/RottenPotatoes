@@ -22,7 +22,7 @@ public class MoviesDAO {
     }
 
     public void persist(Movie movie){
-        this.em.persist(movie);
+        this.em.merge(movie);
     }
 
     public Movie findOne(Integer id) {

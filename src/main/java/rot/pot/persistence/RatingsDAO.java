@@ -20,13 +20,13 @@ public class RatingsDAO {
 
     public List<Rating> findByMovieId(Integer movieId) {
         TypedQuery<Rating> query = em.createNamedQuery("Rating.findByMovie", Rating.class);
-        query.setParameter(movieId, "movieId");
+        query.setParameter("movieId", movieId);
         return query.getResultList();
     }
 
     public List<Rating> findByUserId(Integer userId) {
         TypedQuery<Rating> query = em.createNamedQuery("Rating.findByUser", Rating.class);
-        query.setParameter(userId, "userId");
+        query.setParameter("userId", userId);
         return query.getResultList();
     }
 
