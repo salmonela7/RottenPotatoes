@@ -28,7 +28,7 @@ public class Actor {
 
     private Date dateOfBirth;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "actors")
     private List<Movie> movies = new ArrayList<>();
 
     @Override
@@ -41,7 +41,6 @@ public class Actor {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(actorId);
     }
 }

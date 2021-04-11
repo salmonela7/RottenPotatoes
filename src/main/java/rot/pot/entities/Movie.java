@@ -26,11 +26,18 @@ public class Movie {
 
     private Date releaseDate;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinTable(name = "MOVIE_ACTOR",
+            joinColumns = {@JoinColumn(name = "MOVIE_MOVIEID")},
+            inverseJoinColumns = {@JoinColumn(name = "MOVIE_ACTORID")})
     private List<Actor> actors = new ArrayList<>();
 
     @OneToMany(mappedBy = "movie")
     private List<Rating> ratings = new ArrayList<>();
+
+    public void addActor(Actor a){
+        this.actors.add(a);
+    }
 
     @Override
     public boolean equals(Object o) {

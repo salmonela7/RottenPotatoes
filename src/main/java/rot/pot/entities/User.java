@@ -9,7 +9,9 @@ import java.util.*;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "User.findAll", query = "select a from User as a")
+        @NamedQuery(name = "User.findAll", query = "select a from User as a"),
+        @NamedQuery(name = "User.findByCredentials", query =
+                "select a from User as a where a.username = :user and a.password = :pass")
 })
 @Table(name = "USER")
 @Getter @Setter
