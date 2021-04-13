@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+<h:head/>
+<h:body>
+    <h2>Movies:</h2>
+    <ol>
+        <ui:repeat value="#{moviesMyBatis.allMovies}" var="movie">
+            <li><h:link value="#{movie.name}" outcome="/mybatis/MovieDetails?movieId=#{movie.movieid}&amp;?faces-redirect=true" /></li>
+        </ui:repeat>
+    </ol>
+    <h2>Actors:</h2>
+    <ol>
+        <ui:repeat value="#{actorsMyBatis.allActors}" var="actor">
+            <li><h:link value="#{actor.firstname} #{actor.lastname}" outcome="/mybatis/ActorDetails?actorId=#{actor.actorid}&amp;?faces-redirect=true" /></li>
+        </ui:repeat>
+    </ol>
+    <h:form>
+        <h:commandButton value="Add movie" action="/mybatis/MovieCreatePage?faces-redirect=true" />
+        <br/>
+        <h:commandButton value="Add actor" action="/mybatis/ActorCreatePage?faces-redirect=true" />
+        <br/>
+        <h:commandButton value="Logout" action="#{usersMyBatis.logout}" />
+    </h:form>
+    <!--    <h:link outcome="myBatis/teams" value="MyBatis implementation"/>-->
+</h:body>
+</html>

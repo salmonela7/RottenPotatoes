@@ -1,9 +1,9 @@
-package rot.pot.Usecases;
+package rot.pot.usecases.mybatis;
 
 import lombok.Getter;
 import lombok.Setter;
-import rot.pot.entities.Movie;
-import rot.pot.persistence.MoviesDAO;
+import rot.pot.entities.mybatis.Movie;
+import rot.pot.persistence.mybatis.MovieMapper;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
@@ -11,10 +11,10 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 @Model
-public class MovieCreator {
+public class MovieCreatorMyBatis {
 
     @Inject
-    private MoviesDAO moviesDAO;
+    private MovieMapper movieMapper;
 
     @Getter @Setter
     private Movie movieToCreate = new Movie();
@@ -25,7 +25,7 @@ public class MovieCreator {
 
     @Transactional
     public String createMovie() {
-        this.moviesDAO.persist(movieToCreate);
-        return "MainPage?faces-redirect=true";
+        this.movieMapper.insert(movieToCreate);
+        return "/mybatis/MainPage?faces-redirect=true";
     }
 }

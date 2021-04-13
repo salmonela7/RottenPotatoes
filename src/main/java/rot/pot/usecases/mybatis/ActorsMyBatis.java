@@ -1,8 +1,8 @@
-package rot.pot.Usecases;
+package rot.pot.usecases.mybatis;
 
 import lombok.Getter;
-import rot.pot.entities.Actor;
-import rot.pot.persistence.ActorsDAO;
+import rot.pot.entities.mybatis.Actor;
+import rot.pot.persistence.mybatis.ActorMapper;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
@@ -10,10 +10,10 @@ import javax.inject.Inject;
 import java.util.List;
 
 @Model
-public class Actors {
+public class ActorsMyBatis {
 
     @Inject
-    private ActorsDAO actorsDAO;
+    private ActorMapper actorMapper;
 
     @Getter
     private List<Actor> allActors;
@@ -24,6 +24,6 @@ public class Actors {
     }
 
     private void loadAllActors(){
-        this.allActors = actorsDAO.loadAll();
+        this.allActors = actorMapper.selectAll();
     }
 }

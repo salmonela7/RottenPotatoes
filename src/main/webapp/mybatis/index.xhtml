@@ -8,22 +8,22 @@
     <h:form>
         <h:panelGrid columns="3">
             <h:outputLabel>Username:</h:outputLabel>
-            <h:inputText value="#{users.username}" required="true"/>
+            <h:inputText value="#{usersMyBatis.username}" required="true"/>
             <br />
             <br />
 
             <h:outputLabel>Password:</h:outputLabel>
-            <h:inputSecret value="#{users.password}" required="true"/>
+            <h:inputSecret value="#{usersMyBatis.password}" required="true"/>
             <br />
             <br />
         </h:panelGrid>
-        <h:commandButton value="Login" action="#{users.validateCredentials}" />
+        <h:commandButton value="Login" action="#{usersMyBatis.validateCredentials}" />
     </h:form>
     <h:form>
-        <h:commandButton value="Register" action="Registration?faces-redirect=true" />
+        <h:commandButton value="Register" action="/mybatis/Registration?faces-redirect=true" />
     </h:form>
-    <h:outputLink value="mybatis/index.xhtml" >
-        MyBatis Implementation
+    <h:outputLink value="../index.xhtml" >
+        JPA Implementation
     </h:outputLink>
 </h:body>
 </html>

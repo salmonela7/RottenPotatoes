@@ -1,23 +1,29 @@
-package rot.pot.Usecases;
+package rot.pot.usecases.mybatis;
 
 import lombok.Getter;
 import lombok.Setter;
-import rot.pot.entities.Actor;
+import rot.pot.entities.mybatis.Actor;
+import rot.pot.entities.mybatis.Movie;
 import rot.pot.persistence.ActorsDAO;
+import rot.pot.persistence.mybatis.ActorMapper;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import java.util.List;
 import java.util.Map;
 
 @Model
-public class ActorDetails {
+public class ActorDetailsMyBatis {
     @Inject
-    private ActorsDAO actorsDAO;
+    private ActorMapper actorMapper;
 
     @Getter @Setter
     private Actor currentActor;
+
+    @Getter @Setter
+    private List<Movie> actorMovies;
 
     @PostConstruct
     public void init() {
@@ -33,6 +39,7 @@ public class ActorDetails {
     }
 
     private void loadActor(Integer actorId) {
-        this.currentActor = actorsDAO.findOne(actorId);
+        this.actorMovies = actorMapper.selectActorMovies(actorId);
+        this.currentActor = actorMapper.selectByPrimaryKey(actorId);
     }
 }

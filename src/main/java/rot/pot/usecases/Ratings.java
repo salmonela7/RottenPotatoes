@@ -1,4 +1,4 @@
-package rot.pot.Usecases;
+package rot.pot.usecases;
 
 import lombok.Getter;
 import lombok.Setter;

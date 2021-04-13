@@ -1,9 +1,9 @@
-package rot.pot.Usecases;
+package rot.pot.usecases;
 
 import lombok.Getter;
 import lombok.Setter;
-import rot.pot.entities.Actor;
-import rot.pot.persistence.ActorsDAO;
+import rot.pot.entities.Movie;
+import rot.pot.persistence.MoviesDAO;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
@@ -11,21 +11,21 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 @Model
-public class ActorCreator {
+public class MovieCreator {
 
     @Inject
-    private ActorsDAO actorsDAO;
+    private MoviesDAO moviesDAO;
 
     @Getter @Setter
-    private Actor actorToCreate = new Actor();
+    private Movie movieToCreate = new Movie();
 
     @PostConstruct
-    public void init(){
+    public void init() {
     }
 
     @Transactional
-    public String createActor() {
-        this.actorsDAO.persist(actorToCreate);
+    public String createMovie() {
+        this.moviesDAO.persist(movieToCreate);
         return "MainPage?faces-redirect=true";
     }
 }

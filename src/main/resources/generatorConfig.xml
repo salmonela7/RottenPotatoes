@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="RotPotDB" targetRuntime="MyBatis3Simple">
+        <jdbcConnection driverClass="org.h2.Driver"
+                        connectionURL="jdbc:h2:~/h2database/RotPotDB;AUTO_SERVER=TRUE"
+                        userId="sa"
+                        password="sa">
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="rot.pot.entities.mybatis" targetProject="MAVEN" />
+
+        <sqlMapGenerator targetPackage="rot.pot.usecases.mybatis.xml" targetProject="MAVEN" />
+        <javaClientGenerator type="XMLMAPPER" targetPackage="rot.pot.persistence.mybatis" targetProject="MAVEN" />
+
+
+        <table schema="public" tableName="ACTOR">
+            <generatedKey column="ACTORID" identity="true" sqlStatement="JDBC" />
+            <ignoreColumn column="opt_lock_version" />
+        </table>
+        <table schema="public" tableName="MOVIE">
+            <generatedKey column="MOVIEID" identity="true" sqlStatement="JDBC" />
+            <ignoreColumn column="opt_lock_version" />
+        </table>
+        <table schema="public" tableName="RATING">
+            <generatedKey column="RATINGID" identity="true" sqlStatement="JDBC" />
+            <ignoreColumn column="opt_lock_version" />
+        </table>
+        <table schema="public" tableName="USER">
+            <generatedKey column="USERID" identity="true" sqlStatement="JDBC" />
+            <ignoreColumn column="opt_lock_version" />
+        </table>
+    </context>
+</generatorConfiguration>

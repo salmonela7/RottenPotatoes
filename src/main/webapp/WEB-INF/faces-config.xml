@@ -7,8 +7,8 @@
     <navigation-rule>
         <from-view-id>/index.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>Movies?faces-redirect=true</from-outcome>
-            <to-view-id>/Movies.MovieCreatePage.xhtml</to-view-id>
+            <from-outcome>MainPage?faces-redirect=true</from-outcome>
+            <to-view-id>/MainPage.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
