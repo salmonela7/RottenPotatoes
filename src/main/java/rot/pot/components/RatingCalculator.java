@@ -7,11 +7,10 @@ import rot.pot.persistence.MoviesDAO;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.NotFoundException;
-import java.io.Serializable;
 import java.util.List;
 
 @ApplicationScoped
-public class RatingCalculator implements Serializable {
+public class RatingCalculator implements IRatingCalculator{
 
     @Inject
     MoviesDAO moviesDAO;

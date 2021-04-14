@@ -7,11 +7,10 @@ import rot.pot.persistence.mybatis.MovieMapper;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.NotFoundException;
-import java.io.Serializable;
 import java.util.List;
 
 @ApplicationScoped
-public class RatingCalculatorMyBatis implements Serializable {
+public class RatingCalculatorMyBatis implements IRatingCalculatorMyBatis{
 
     @Inject
     MovieMapper movieMapper;

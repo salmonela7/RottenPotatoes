@@ -2,7 +2,7 @@ package rot.pot.usecases;
 
 import lombok.Getter;
 import lombok.Setter;
-import rot.pot.components.RatingCalculator;
+import rot.pot.components.IRatingCalculator;
 import rot.pot.entities.Actor;
 import rot.pot.entities.Movie;
 import rot.pot.persistence.ActorsDAO;
@@ -28,7 +28,7 @@ public class MovieDetails implements Serializable {
     private ActorsDAO actorsDAO;
 
     @Inject
-    private RatingCalculator ratingCalculator;
+    private IRatingCalculator ratingCalculator;
 
     @Getter
     @Setter

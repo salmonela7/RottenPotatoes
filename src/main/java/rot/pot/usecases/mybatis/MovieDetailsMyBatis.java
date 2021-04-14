@@ -2,13 +2,9 @@ package rot.pot.usecases.mybatis;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.ibatis.exceptions.TooManyResultsException;
-import rot.pot.components.RatingCalculator;
-import rot.pot.components.RatingCalculatorMyBatis;
+import rot.pot.components.IRatingCalculatorMyBatis;
 import rot.pot.entities.mybatis.Actor;
 import rot.pot.entities.mybatis.Movie;
-import rot.pot.entities.mybatis.Rating;
-import rot.pot.entities.mybatis.User;
 import rot.pot.persistence.mybatis.ActorMapper;
 import rot.pot.persistence.mybatis.MovieMapper;
 
@@ -19,8 +15,6 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +29,7 @@ public class MovieDetailsMyBatis implements Serializable {
     private ActorMapper actorMapper;
 
     @Inject
-    private RatingCalculatorMyBatis ratingCalculator;
+    private IRatingCalculatorMyBatis ratingCalculator;
 
     @Getter
     @Setter
