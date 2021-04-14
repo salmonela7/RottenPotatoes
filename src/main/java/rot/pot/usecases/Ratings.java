@@ -57,7 +57,7 @@ public class Ratings implements Serializable {
         Movie movie = getMovie(currentMovieId);
         this.ratingToCreate.setUser(user);
         this.ratingToCreate.setMovie(movie);
-        this.ratingsDAO.persist(this.ratingToCreate);
+        this.ratingsDAO.persist(ratingToCreate);
         return "MovieDetails?movieId=" + currentMovieId + "&faces-redirect=true";
     }
 
