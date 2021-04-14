@@ -76,8 +76,8 @@
   </select>
   <select id="selectMovieActors" parameterType="java.lang.Integer" resultMap="rot.pot.persistence.mybatis.ActorMapper.BaseResultMap">
     select ACTORID, DATEOFBIRTH, FIRSTNAME, LASTNAME from PUBLIC.MOVIE as m
-                              left join PUBLIC.MOVIE_ACTOR as am on m.MOVIEID = am.MOVIE_MOVIEID
-                              left join PUBLIC.ACTOR as a on a.ACTORID = am.MOVIE_ACTORID
+                              inner join PUBLIC.MOVIE_ACTOR as am on m.MOVIEID = am.MOVIE_MOVIEID
+                              inner join PUBLIC.ACTOR as a on a.ACTORID = am.MOVIE_ACTORID
     where m.MOVIEID = #{movieid,jdbcType=INTEGER}
   </select>
 </mapper>

@@ -1,5 +1,6 @@
 package rot.pot.entities;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +18,7 @@ import java.util.*;
 })
 @Table(name = "RATING")
 @Getter @Setter
+@EqualsAndHashCode(of={"ratingId"})
 public class Rating {
 
     public Rating(){
@@ -41,18 +43,4 @@ public class Rating {
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Rating rating = (Rating) o;
-        return Objects.equals(ratingId, rating.ratingId);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(ratingId);
-    }
 }

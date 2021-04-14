@@ -1,5 +1,6 @@
 package rot.pot.entities;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +16,7 @@ import java.util.*;
 })
 @Table(name = "USER")
 @Getter @Setter
+@EqualsAndHashCode(of={"userId"})
 public class User implements Serializable {
 
     @Id
@@ -35,18 +37,5 @@ public class User implements Serializable {
     private List<Rating> ratings = new ArrayList<>();
 
     public User() {
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(userId, user.userId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(userId);
     }
 }

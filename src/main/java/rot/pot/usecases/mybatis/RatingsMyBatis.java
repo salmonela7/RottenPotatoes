@@ -11,16 +11,16 @@ import rot.pot.persistence.mybatis.UserMapper;
 import rot.pot.utilities.SessionUtils;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.Map;
 
-@Model
 @ViewScoped
+@Named
 public class RatingsMyBatis implements Serializable {
 
     @Inject

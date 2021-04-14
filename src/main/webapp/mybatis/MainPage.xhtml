@@ -11,6 +11,11 @@
     <ol>
         <ui:repeat value="#{moviesMyBatis.allMovies}" var="movie">
             <li><h:link value="#{movie.name}" outcome="/mybatis/MovieDetails?movieId=#{movie.movieid}&amp;?faces-redirect=true" /></li>
+            <ul>
+                <ui:repeat value="#{moviesMyBatis.getActorsByMovie(movie.movieid)}" var="movieActor">
+                    <li><h:link value="#{movieActor.firstname} #{movieActor.lastname}" outcome="/mybatis/ActorDetails?actorId=#{movieActor.actorid}&amp;?faces-redirect=true" /></li>
+                </ui:repeat>
+            </ul>
         </ui:repeat>
     </ol>
     <h2>Actors:</h2>

@@ -4,13 +4,13 @@ import rot.pot.entities.mybatis.Movie;
 import rot.pot.entities.mybatis.Rating;
 import rot.pot.persistence.mybatis.MovieMapper;
 
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.NotFoundException;
 import java.io.Serializable;
 import java.util.List;
 
-@SessionScoped
+@ApplicationScoped
 public class RatingCalculatorMyBatis implements Serializable {
 
     @Inject

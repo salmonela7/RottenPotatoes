@@ -11,6 +11,11 @@
     <ol>
         <ui:repeat value="#{movies.allMovies}" var="movie">
             <li><h:link value="#{movie.name}" outcome="MovieDetails?movieId=#{movie.movieId}&amp;?faces-redirect=true" /></li>
+            <ul>
+                <ui:repeat value="#{movie.actors}" var="movieActor">
+                    <li><h:link value="#{movieActor.firstName} #{movieActor.lastName}" outcome="ActorDetails?actorId=#{movieActor.actorId}&amp;?faces-redirect=true" /></li>
+                </ui:repeat>
+            </ul>
         </ui:repeat>
     </ol>
     <h2>Actors:</h2>

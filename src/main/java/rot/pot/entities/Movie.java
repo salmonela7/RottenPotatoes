@@ -1,5 +1,6 @@
 package rot.pot.entities;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +13,7 @@ import java.util.*;
 })
 @Table(name = "MOVIE")
 @Getter @Setter
+@EqualsAndHashCode(of={"movieId"})
 public class Movie {
 
     public Movie(){
@@ -26,7 +28,7 @@ public class Movie {
 
     private Date releaseDate;
 
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name = "MOVIE_ACTOR",
             joinColumns = {@JoinColumn(name = "MOVIE_MOVIEID")},
             inverseJoinColumns = {@JoinColumn(name = "MOVIE_ACTORID")})
@@ -37,19 +39,5 @@ public class Movie {
 
     public void addActor(Actor a){
         this.actors.add(a);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Movie movie = (Movie) o;
-        return Objects.equals(movieId, movie.movieId);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(movieId);
     }
 }

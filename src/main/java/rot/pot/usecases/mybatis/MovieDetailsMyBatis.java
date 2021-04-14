@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.ibatis.exceptions.TooManyResultsException;
 import rot.pot.components.RatingCalculator;
+import rot.pot.components.RatingCalculatorMyBatis;
 import rot.pot.entities.mybatis.Actor;
 import rot.pot.entities.mybatis.Movie;
 import rot.pot.entities.mybatis.Rating;
@@ -34,7 +35,7 @@ public class MovieDetailsMyBatis implements Serializable {
     private ActorMapper actorMapper;
 
     @Inject
-    private RatingCalculator ratingCalculator;
+    private RatingCalculatorMyBatis ratingCalculator;
 
     @Getter
     @Setter
@@ -77,6 +78,6 @@ public class MovieDetailsMyBatis implements Serializable {
     }
 
     private void calculateRating(Integer movieId) {
-        this.currentMovieRating = ratingCalculator.ClaculateMovieRatingMyBatis(movieId);
+        this.currentMovieRating = ratingCalculator.ClaculateMovieRating(movieId);
     }
 }

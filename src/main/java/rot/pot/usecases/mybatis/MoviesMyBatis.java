@@ -1,7 +1,6 @@
 package rot.pot.usecases.mybatis;
 
 import lombok.Getter;
-import lombok.Setter;
 import rot.pot.entities.mybatis.Actor;
 import rot.pot.entities.mybatis.Movie;
 import rot.pot.persistence.mybatis.MovieMapper;
@@ -23,6 +22,10 @@ public class MoviesMyBatis {
     @PostConstruct
     public void init() {
         loadAllMovies();
+    }
+
+    public List<Actor> getActorsByMovie(Integer movieId){
+        return movieMapper.selectMovieActors(movieId);
     }
 
     private void loadAllMovies() {

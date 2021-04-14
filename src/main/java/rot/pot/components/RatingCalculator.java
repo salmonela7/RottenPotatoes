@@ -4,13 +4,13 @@ import rot.pot.entities.Movie;
 import rot.pot.entities.Rating;
 import rot.pot.persistence.MoviesDAO;
 
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.NotFoundException;
 import java.io.Serializable;
 import java.util.List;
 
-@SessionScoped
+@ApplicationScoped
 public class RatingCalculator implements Serializable {
 
     @Inject
