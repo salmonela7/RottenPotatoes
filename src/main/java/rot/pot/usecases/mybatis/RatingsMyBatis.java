@@ -61,7 +61,6 @@ public class RatingsMyBatis implements Serializable {
     }
 
     private Movie getMovie(Integer movieId) {
-        Movie mov = this.movieMapper.selectMovie(movieId).get(0);
         return this.movieMapper.selectMovie(movieId).get(0);
     }
 
