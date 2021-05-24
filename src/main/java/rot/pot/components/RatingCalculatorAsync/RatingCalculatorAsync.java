@@ -2,24 +2,22 @@ package rot.pot.components.RatingCalculatorAsync;
 
 import rot.pot.entities.Movie;
 import rot.pot.entities.Rating;
+import rot.pot.persistence.AsyncInjection;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
-import javax.persistence.SynchronizationType;
 import javax.ws.rs.NotFoundException;
-import java.io.Serializable;
 import java.util.List;
 
 @ApplicationScoped
-public class RatingCalculatorAsync implements Serializable, IRatingCalculatorAsync {
-
-    @PersistenceUnit
-    private EntityManagerFactory emf;
+public class RatingCalculatorAsync implements IRatingCalculatorAsync {
+    
+    @AsyncInjection
+    @Inject
+    EntityManager em;
 
     public Float CalculateMovieRating(Integer movieId){
-        EntityManager em = emf.createEntityManager(SynchronizationType.SYNCHRONIZED);
         Movie movie = em.find(Movie.class, movieId);
 
         try {

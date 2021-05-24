@@ -1,6 +1,7 @@
 package rot.pot.persistence;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Default;
 import javax.enterprise.inject.Disposes;
@@ -23,7 +24,18 @@ public class Resources {
         return emf.createEntityManager(SynchronizationType.SYNCHRONIZED);
     }
 
+    @Produces
+    @AsyncInjection
+    @Dependent
+    private EntityManager createJTATransactionalEntityManager() {
+        return emf.createEntityManager(SynchronizationType.SYNCHRONIZED);
+    }
+
     private void closeDefaultEntityManager(@Disposes @Default EntityManager em) {
+        em.close();
+    }
+
+    private void closeResqueEntityManager(@Disposes @AsyncInjection EntityManager em) {
         em.close();
     }
 }
