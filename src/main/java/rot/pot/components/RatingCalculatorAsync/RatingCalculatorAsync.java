@@ -2,30 +2,28 @@ package rot.pot.components.RatingCalculatorAsync;
 
 import rot.pot.entities.Movie;
 import rot.pot.entities.Rating;
-import rot.pot.persistence.MoviesDAO;
 
-import javax.ejb.AsyncResult;
-import javax.ejb.Asynchronous;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.transaction.Transactional;
+import javax.enterprise.context.ApplicationScoped;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
+import javax.persistence.SynchronizationType;
 import javax.ws.rs.NotFoundException;
+import java.io.Serializable;
 import java.util.List;
-import java.util.concurrent.Future;
 
-@Stateless
-public class RatingCalculatorAsync implements IRatingCalculatorAsync {
+@ApplicationScoped
+public class RatingCalculatorAsync implements Serializable, IRatingCalculatorAsync {
 
-    @Inject
-    MoviesDAO moviesDAO;
+    @PersistenceUnit
+    private EntityManagerFactory emf;
 
-    @Asynchronous
-    @Transactional(Transactional.TxType.REQUIRES_NEW)
-    public Future<Float> CalculateMovieRating(Integer movieId){
-        Movie movie = moviesDAO.findOne(movieId);
+    public Float CalculateMovieRating(Integer movieId){
+        EntityManager em = emf.createEntityManager(SynchronizationType.SYNCHRONIZED);
+        Movie movie = em.find(Movie.class, movieId);
 
         try {
-            Thread.sleep(1500);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -41,6 +39,6 @@ public class RatingCalculatorAsync implements IRatingCalculatorAsync {
             ratingSum += rating.getRating();
         }
 
-        return new AsyncResult<>(ratingSum / ratings.size());
+        return ratingSum / ratings.size();
     }
 }

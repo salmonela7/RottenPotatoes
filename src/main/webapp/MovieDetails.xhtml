@@ -11,10 +11,10 @@
     <h2>#{movieDetails.currentMovie.releaseDate}</h2>
     <h:form>
         <h2>
-            <h:outputText id="ratingOutput" value="Rating: #{movieDetails.currentMovieRating}"/>
+            <h:outputText id="ratingOutput" value="#{movieDetails.currentMovieRating}"/>
         </h2>
         <h:panelGrid rendered="#{!movieDetails.ratingLoaded}">
-            <p:poll interval="1" listener="#{movieDetails.calculateRating}" update="ratingOutput"/>
+            <p:poll interval="1" listener="#{movieDetails.checkRatingStatus()}" update="ratingOutput"/>
         </h:panelGrid>
     </h:form>
     <h2>Rating: #{movieDetails.ratingSync}</h2>

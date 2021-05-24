@@ -10,7 +10,6 @@ import rot.pot.persistence.ActorsDAO;
 import rot.pot.persistence.MoviesDAO;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -18,8 +17,8 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 @Model
 @ViewScoped
@@ -31,10 +30,10 @@ public class MovieDetails implements Serializable {
     @Inject
     private ActorsDAO actorsDAO;
 
-    @EJB
+    @Inject
     private IRatingCalculatorAsync ratingCalculator;
 
-    private Future<Float> resultInFuture = null;
+    private CompletableFuture<Float> ratingTask = null;
 
     @Inject
     private IRatingCalculator ratingCalculatorSync;
@@ -49,7 +48,7 @@ public class MovieDetails implements Serializable {
 
     @Getter
     @Setter
-    private float currentMovieRating;
+    private String currentMovieRating;
 
     @Getter
     @Setter
@@ -69,6 +68,7 @@ public class MovieDetails implements Serializable {
                 Integer movieId = Integer.parseInt(requestParameters.get("movieId"));
                 loadMovie(movieId);
                 calculateRatingSync();
+                getRating();
             }
         }
     }
@@ -85,18 +85,26 @@ public class MovieDetails implements Serializable {
         this.currentMovie = moviesDAO.findOne(movieId);
     }
 
-    public void calculateRating() throws ExecutionException, InterruptedException {
-        if (resultInFuture == null) {
-            resultInFuture = ratingCalculator.CalculateMovieRating(currentMovie.getMovieId());
-        }
-        if (resultInFuture.isDone()) {
-            currentMovieRating = resultInFuture.get();
-            //resultInFuture = null;
-            isRatingLoaded = true;
-        }
-    }
-
     public void calculateRatingSync() {
         ratingSync = ratingCalculatorSync.CalculateMovieRating(currentMovie.getMovieId());
+    }
+
+    public void getRating() {
+        ratingTask = CompletableFuture.supplyAsync(() -> ratingCalculator.CalculateMovieRating(currentMovie.getMovieId()));
+    }
+
+    public boolean isRatingBeingRetreived() {
+        return ratingTask != null && !ratingTask.isDone();
+    }
+
+    public void checkRatingStatus() throws ExecutionException, InterruptedException {
+        if (ratingTask == null) {
+            return;
+        } else if (isRatingBeingRetreived()) {
+            currentMovieRating = "Getting the rating...";
+            return;
+        }
+        isRatingLoaded = true;
+        currentMovieRating = "Rating: " + ratingTask.get();
     }
 }
