@@ -2,8 +2,9 @@ package rot.pot.usecases;
 
 import lombok.Getter;
 import lombok.Setter;
+import rot.pot.Interceptors.RestRequestLogger;
 import rot.pot.entities.User;
-import rot.pot.persistence.UsersDAO;
+import rot.pot.persistence.IUsersDAO;
 import rot.pot.utilities.SessionUtils;
 
 import javax.annotation.PostConstruct;
@@ -19,7 +20,7 @@ import javax.transaction.Transactional;
 public class Users {
 
     @Inject
-    private UsersDAO usersDAO;
+    private IUsersDAO usersDAO;
 
     @Getter @Setter
     private User userToCreate = new User();

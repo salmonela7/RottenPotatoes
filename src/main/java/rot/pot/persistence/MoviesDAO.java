@@ -11,7 +11,7 @@ import java.util.List;
 public class MoviesDAO {
 
     @Inject
-    private EntityManager em;
+    protected EntityManager em;
 
     public List<Movie> loadAll() {
         return em.createNamedQuery("Movie.findAll", Movie.class).getResultList();
@@ -21,8 +21,24 @@ public class MoviesDAO {
         this.em = em;
     }
 
-    public void persist(Movie movie){
-        this.em.merge(movie);
+    public boolean persist(Movie movie){
+        try{
+            em.persist(movie);
+        }
+        catch (Exception exception){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean merge(Movie movie){
+        try{
+            em.merge(movie);
+        }
+        catch (Exception exception){
+            return false;
+        }
+        return true;
     }
 
     public Movie findOne(Integer id) {

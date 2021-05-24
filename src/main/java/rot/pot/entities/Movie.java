@@ -1,11 +1,14 @@
 package rot.pot.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @NamedQueries({
@@ -29,12 +32,14 @@ public class Movie {
     private Date releaseDate;
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(name = "MOVIE_ACTOR",
             joinColumns = {@JoinColumn(name = "MOVIE_MOVIEID")},
             inverseJoinColumns = {@JoinColumn(name = "MOVIE_ACTORID")})
     private List<Actor> actors = new ArrayList<>();
 
     @OneToMany(mappedBy = "movie")
+    @JsonIgnore
     private List<Rating> ratings = new ArrayList<>();
 
     public void addActor(Actor a){

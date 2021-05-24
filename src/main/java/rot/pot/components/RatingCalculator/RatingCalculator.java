@@ -1,4 +1,4 @@
-package rot.pot.components;
+package rot.pot.components.RatingCalculator;
 
 import rot.pot.entities.Movie;
 import rot.pot.entities.Rating;
@@ -6,16 +6,18 @@ import rot.pot.persistence.MoviesDAO;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.NotFoundException;
 import java.util.List;
 
 @ApplicationScoped
-public class RatingCalculator implements IRatingCalculator{
-
+public class RatingCalculator implements IRatingCalculator {
     @Inject
     MoviesDAO moviesDAO;
 
-    public float ClaculateMovieRating(Integer movieId){
+    @Override
+    @Transactional
+    public float CalculateMovieRating(Integer movieId){
         Movie movie = moviesDAO.findOne(movieId);
 
         if(movie == null){

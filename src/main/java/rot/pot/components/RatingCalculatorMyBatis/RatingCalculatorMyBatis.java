@@ -1,4 +1,4 @@
-package rot.pot.components;
+package rot.pot.components.RatingCalculatorMyBatis;
 
 import rot.pot.entities.mybatis.Movie;
 import rot.pot.entities.mybatis.Rating;

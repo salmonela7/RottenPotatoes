@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/beans_2_0.xsd"
+       bean-discovery-mode="all">
+    <interceptors>
+        <class>rot.pot.Interceptors.RestRequestLoggerImpl</class>
+    </interceptors>
+    <decorators>
+        <class>rot.pot.Decorators.LoggedRatingCalculatorDecorator</class>
+    </decorators>
+    <alternatives>
+        <class>rot.pot.persistence.LocalUsersDAO</class>
+    </alternatives>
+</beans>

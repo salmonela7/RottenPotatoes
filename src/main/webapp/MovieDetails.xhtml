@@ -3,13 +3,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui"
 >
 <h:head/>
 <h:body>
     <h2>#{movieDetails.currentMovie.name}</h2>
     <h2>#{movieDetails.currentMovie.releaseDate}</h2>
-    <h2>Rating: #{movieDetails.currentMovieRating} / 10</h2>
+    <h:form>
+        <h2>
+            <h:outputText id="ratingOutput" value="Rating: #{movieDetails.currentMovieRating}"/>
+        </h2>
+        <h:panelGrid rendered="#{!movieDetails.ratingLoaded}">
+            <p:poll interval="1" listener="#{movieDetails.calculateRating}" update="ratingOutput"/>
+        </h:panelGrid>
+    </h:form>
+    <h2>Rating: #{movieDetails.ratingSync}</h2>
     <h2>Actors:</h2>
     <ul>
         <ui:repeat value="#{movieDetails.currentMovie.actors}" var="actor">

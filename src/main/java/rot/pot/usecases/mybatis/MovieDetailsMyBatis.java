@@ -2,7 +2,7 @@ package rot.pot.usecases.mybatis;
 
 import lombok.Getter;
 import lombok.Setter;
-import rot.pot.components.IRatingCalculatorMyBatis;
+import rot.pot.components.RatingCalculatorMyBatis.IRatingCalculatorMyBatis;
 import rot.pot.entities.mybatis.Actor;
 import rot.pot.entities.mybatis.Movie;
 import rot.pot.persistence.mybatis.ActorMapper;
