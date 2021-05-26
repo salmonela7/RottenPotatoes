@@ -7,6 +7,7 @@ import rot.pot.components.RatingCalculatorAsync.IRatingCalculatorAsync;
 import rot.pot.entities.Actor;
 import rot.pot.entities.Movie;
 import rot.pot.persistence.ActorsDAO;
+import rot.pot.persistence.AsyncInjection;
 import rot.pot.persistence.MoviesDAO;
 
 import javax.annotation.PostConstruct;
@@ -14,6 +15,7 @@ import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.Map;
@@ -58,6 +60,10 @@ public class MovieDetails implements Serializable {
     @Setter
     private Integer selectedActor;
 
+    @Getter
+    @Setter
+    private String newTitle;
+
     @PostConstruct
     public void init() {
         Map<String, String> requestParameters =
@@ -71,6 +77,30 @@ public class MovieDetails implements Serializable {
                 getRating();
             }
         }
+    }
+
+    @Transactional
+    public String updateTitle() throws InterruptedException {
+        currentMovie.setName(newTitle);
+
+        try{
+            moviesDAO.merge(currentMovie);
+            moviesDAO.flush();
+            Thread.sleep(2000);
+        }
+        catch (OptimisticLockException exception){
+            return "MovieDetails?movieId=" + this.currentMovie.getMovieId() + "&faces-redirect=true&error=optimistic-lock-exception";
+        }
+
+        return "MovieDetails?movieId=" + this.currentMovie.getMovieId() + "&faces-redirect=true";
+    }
+
+    @Transactional(Transactional.TxType.REQUIRES_NEW)
+    public void recoverOptimisticLock() throws InterruptedException {
+        Movie conflictingMovie = moviesDAO.findOne(currentMovie.getMovieId());
+        currentMovie = conflictingMovie;
+        //currentMovie.setVersion(conflictingMovie.getVersion());
+        updateTitle();
     }
 
     @Transactional

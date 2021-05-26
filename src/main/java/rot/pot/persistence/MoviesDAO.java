@@ -5,6 +5,7 @@ import rot.pot.entities.Movie;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import java.util.List;
 
 @ApplicationScoped
@@ -39,6 +40,14 @@ public class MoviesDAO {
             return false;
         }
         return true;
+    }
+
+    public void flush(){
+        em.flush();
+    }
+
+    public void refresh(Movie movie){
+        em.refresh(movie);
     }
 
     public Movie findOne(Integer id) {

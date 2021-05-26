@@ -16,12 +16,12 @@ public abstract class LoggedRatingCalculatorDecorator implements IRatingCalculat
     @Inject
     @Delegate
     @Any
-    IRatingCalculator  ratingCalculator;
+    IRatingCalculator ratingCalculator;
 
     @Inject
     MoviesDAO moviesDAO;
 
-    public float CalculateMovieRating(Integer movieId){
+    public float CalculateMovieRating(Integer movieId) {
         Movie movie = moviesDAO.findOne(movieId);
 
         if (movie == null){

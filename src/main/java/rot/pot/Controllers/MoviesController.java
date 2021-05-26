@@ -48,7 +48,7 @@ public class MoviesController {
     }
 
     @PUT
-    @Path("{id}/title={newtitle}")
+    @Path("{id}/{newtitle}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response createMovie(@PathParam("id") Integer movieId, @PathParam("newtitle") String newTitle) {

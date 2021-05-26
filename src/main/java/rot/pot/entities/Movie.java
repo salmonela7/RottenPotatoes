@@ -42,6 +42,10 @@ public class Movie {
     @JsonIgnore
     private List<Rating> ratings = new ArrayList<>();
 
+    @Version
+    @Column(name = "OPT_LOCK_VERSION")
+    private Integer version;
+
     public void addActor(Actor a){
         this.actors.add(a);
     }

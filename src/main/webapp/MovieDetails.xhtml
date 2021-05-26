@@ -8,6 +8,16 @@
 <h:head/>
 <h:body>
     <h2>#{movieDetails.currentMovie.name}</h2>
+    <h:form>
+        <h:outputLabel>Change title:</h:outputLabel>
+        <h:inputText value="#{movieDetails.newTitle}"/>
+        <h:commandButton value="Change name" action="#{movieDetails.updateTitle}" />
+        <h:outputText value="Movie title was modified by another user. If you want to override it - try again" rendered="#{param['error'] == 'optimistic-lock-exception'}" />
+    </h:form>
+    <h:form rendered="#{param['error'] == 'optimistic-lock-exception'}">
+        <h:inputText value="#{movieDetails.newTitle}"/>
+        <h:commandButton value="Overwrite name" action="#{movieDetails.recoverOptimisticLock}"/>
+    </h:form>
     <h2>#{movieDetails.currentMovie.releaseDate}</h2>
     <h:form>
         <h2>
